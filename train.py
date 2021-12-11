@@ -125,8 +125,9 @@ A = tf.convert_to_tensor(A, tf.float32)
 l2 = 5e-4
 rate = 0.4
 epochs = 200
-learning_rate = 5e-3 
-patience = 100
+# learning_rate = 5e-3 
+learning_rate = 0.01
+patience = 200
 labels_encoded, classes = encode_label(labels)
 
 
@@ -172,3 +173,16 @@ report = classification_report(np.argmax(y_test,axis=1), np.argmax(y_pred[test_m
 
 print('GAT Classification Report: \n {}'.format(report))
 print(end - start)
+
+'''
+model.fit([features, A],
+          labels_encoded,
+          sample_weight=train_mask,
+          epochs=epochs,
+          batch_size=num_nodes,
+          validation_data=validation_data,
+          shuffle=False,
+          callbacks=[
+              tf.keras.callbacks.EarlyStopping(patience=patience,  restore_best_weights=True)
+          ])
+'''
