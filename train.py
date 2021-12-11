@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import networkx as nx
-
+import time
 import os
 import csv
 
@@ -148,7 +148,7 @@ model.compile(optimizer=optimizer,
               weighted_metrics=['acc'])
 
 print(model.summary())
-
+start = time.time()
 validation_data = ([features, A], labels_encoded, val_mask)
 model.fit([features, A],
           labels_encoded,
@@ -165,8 +165,10 @@ model.fit([features, A],
 features_test = features[test_mask]
 A_test = np.array(A)[test_mask,:][:,test_mask]
 y_test = labels_encoded[test_mask]
-
+end = time.time()
 y_pred = model.predict([features, A], batch_size=num_nodes)
 
 report = classification_report(np.argmax(y_test,axis=1), np.argmax(y_pred[test_mask],axis=1), target_names=classes)
+
 print('GAT Classification Report: \n {}'.format(report))
+print(end - time)
