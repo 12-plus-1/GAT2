@@ -155,7 +155,7 @@ model.fit([features, A],
           labels_encoded,
           sample_weight=train_mask,
           epochs=epochs,
-          batch_size=num_nodes,
+          batch_size= 140,
           validation_data=validation_data,
           shuffle=False,
           callbacks=[
