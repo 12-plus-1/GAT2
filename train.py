@@ -124,7 +124,7 @@ A = tf.convert_to_tensor(A, tf.float32)
 
 l2 = 5e-4
 rate = 0.4
-epochs = 300
+epochs = 200
 learning_rate = 5e-3 
 patience = 100
 labels_encoded, classes = encode_label(labels)
@@ -171,4 +171,4 @@ y_pred = model.predict([features, A], batch_size=num_nodes)
 report = classification_report(np.argmax(y_test,axis=1), np.argmax(y_pred[test_mask],axis=1), target_names=classes)
 
 print('GAT Classification Report: \n {}'.format(report))
-print(end - time)
+print(end - start)
