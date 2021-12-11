@@ -132,7 +132,7 @@ labels_encoded, classes = encode_label(labels)
 
 
 inp_H = tf.keras.Input((features.shape[1],))
-inp_A = tf.keras.Input((num_nodes,))
+inp_A = tf.keras.Input((140,))
 
 dropout_1 = tf.keras.layers.Dropout(rate)(inp_H)
 out_1 = GraphAttentionLayer(8, 8, activation=tf.nn.elu, l2=l2)([dropout_1, inp_A])
@@ -155,7 +155,7 @@ model.fit([features, A],
           labels_encoded,
           sample_weight=train_mask,
           epochs=epochs,
-          batch_size= 140,
+          batch_size = 140,
           validation_data=validation_data,
           shuffle=False,
           callbacks=[
